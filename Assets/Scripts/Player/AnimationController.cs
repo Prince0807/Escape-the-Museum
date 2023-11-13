@@ -7,6 +7,12 @@ public class AnimationController : MonoBehaviour
     [SerializeField] GameObject equipedAxe;
     [SerializeField] GameObject holsterAxe;
 
+    [SerializeField] Transform attackPoint;
+    [SerializeField] float attackRange;
+    [SerializeField] LayerMask attackMask;
+
+    [SerializeField] GameObject attackCollider;
+
     private bool isAxeEquipped;
 
     private void Start()
@@ -35,13 +41,14 @@ public class AnimationController : MonoBehaviour
         holsterAxe.SetActive(true);
     }
 
-    public void StartAttack()
+    public void Attack()
     {
+        Collider[] objs = Physics.OverlapSphere(attackPoint.position, attackRange, attackMask);
 
-    }
-
-    public void StopAttack()
-    {
-
+        foreach (Collider obj in objs)
+        {
+            if (obj.TryGetComponent(out IDamageable hit))
+                hit.Damage(1000);
+        }
     }
 }

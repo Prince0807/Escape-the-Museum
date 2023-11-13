@@ -69,7 +69,6 @@ public class ThirdPersonController : MonoBehaviour
 
         Vector3 moveDirection = (Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward).normalized * (Input.GetButton("Sprint") ? runSpeed : walkSpeed);
         controller.Move(moveDirection * Time.deltaTime);
-        Debug.Log(moveDirection.magnitude);
         animator.SetFloat("Speed", moveDirection.magnitude);
     }
 

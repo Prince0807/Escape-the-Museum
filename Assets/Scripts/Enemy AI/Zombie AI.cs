@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class ZombieAI : MonoBehaviour, IDamageable
 {
     [SerializeField] float attackRange = 1.5f;
-    public int Health { get; set; }
+    [SerializeField] public int Health { get; set; }
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -21,12 +21,16 @@ public class ZombieAI : MonoBehaviour, IDamageable
             animator.Play("Death");
             agent.isStopped = true;
             agent.enabled = false;
+
+            GameManager.INSTANCE.AddScore(100);
+
             this.enabled = false;
         }
     }
 
     private void Awake()
     {
+        Health = 100;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         player = FindObjectOfType<ThirdPersonController>().transform;
