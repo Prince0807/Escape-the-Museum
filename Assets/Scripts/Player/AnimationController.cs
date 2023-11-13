@@ -34,4 +34,14 @@ public class AnimationController : MonoBehaviour
         equipedAxe.SetActive(false);
         holsterAxe.SetActive(true);
     }
+
+    public void StartAttack()
+    {
+
+    }
+
+    public void StopAttack()
+    {
+
+    }
 }

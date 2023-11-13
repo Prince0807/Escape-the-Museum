@@ -4,33 +4,29 @@ using UnityEngine;
 
 public class AxeController : MonoBehaviour
 {
+    ThirdPersonController controller;
     Animator animator;
 
     float damage = 20f;
-    bool isAttacking = false;
 
     private void Start()
     {
-        animator = GetComponent<Animator>();
+        animator = GetComponentInParent<Animator>();
+        controller = GetComponentInParent<ThirdPersonController>();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-
-        }
-
-        if (!isAttacking)
+        if (!controller.isInteracting)
         {
             if (Input.GetButtonDown("Attack1"))
-                animator.Play("Attack1");
+                animator.Play("Attack 1", 1);
             else if (Input.GetButtonDown("Attack2"))
-                animator.Play("Attack2");
+                animator.Play("Attack 2", 1);
             else if (Input.GetButtonDown("Attack3"))
-                animator.Play("Attack3");
+                animator.Play("Attack 3", 1);
             else if (Input.GetButtonDown("Attack4"))
-                animator.Play("Attack4");
+                animator.Play("Attack 4", 1);
         }
     }
 }

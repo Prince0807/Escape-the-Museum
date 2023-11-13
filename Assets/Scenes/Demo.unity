@@ -400,7 +400,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 207998175}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.050364185, y: 0.9190834, z: -0.12500314, w: 0.3703018}
+  m_LocalRotation: {x: 0.05036419, y: 0.91908336, z: -0.12500313, w: 0.3703018}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1175,6 +1175,50 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1077956852
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1077956854}
+  - component: {fileID: 1077956853}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1077956853
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077956852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 653b70f646473cf4a975f33a73bafe83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1077956854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1077956852}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1107901145
 GameObject:
   m_ObjectHideFlags: 3
@@ -1483,6 +1527,7 @@ MonoBehaviour:
   runSpeed: 7
   jumpHeight: 1
   gravity: -3
+  isInteracting: 0
 --- !u!1 &2072216749
 GameObject:
   m_ObjectHideFlags: 0
@@ -2983,6 +3028,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4613432682853237020}
   - component: {fileID: 6246523081988637829}
+  - component: {fileID: 6246523081988637830}
   m_Layer: 0
   m_Name: BattleAxe_GEO
   m_TagString: Untagged
@@ -4393,6 +4439,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.2381663, y: -0.2699303, z: 0.41024148}
     m_Extent: {x: 0.4474419, y: 0.49371064, z: 0.7871598}
   m_DirtyAABB: 0
+--- !u!114 &6246523081988637830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3452521699362825310}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1dd2406a9836545b0e1efb5edca22b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &6309426875347793076
 Transform:
   m_ObjectHideFlags: 0
@@ -5404,3 +5462,4 @@ SceneRoots:
   - {fileID: 550175271}
   - {fileID: 1637084114}
   - {fileID: 2072216753}
+  - {fileID: 1077956854}

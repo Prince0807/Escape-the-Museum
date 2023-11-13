@@ -24,6 +24,8 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Axe")]
     private bool isAxeEquipped = false;
 
+    [HideInInspector] public bool isInteracting = false;
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
@@ -50,6 +52,9 @@ public class ThirdPersonController : MonoBehaviour
 
     private void Movement()
     {
+        if (isInteracting)
+            return;
+
         Vector3 moveInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
 
         if(moveInput.magnitude < 0.1f)
@@ -70,7 +75,7 @@ public class ThirdPersonController : MonoBehaviour
 
     private void JumpAndFall()
     {
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded && !isInteracting)
         {
             velocity.y = Mathf.Sqrt((jumpHeight * 10) * -2f * gravity);
             animator.SetBool("IsJumping", true);
@@ -82,12 +87,12 @@ public class ThirdPersonController : MonoBehaviour
 
     private void Axe()
     {
-        if(Input.GetKeyDown(KeyCode.X))
+        if(Input.GetKeyDown(KeyCode.X) && !isInteracting)
         {
             isAxeEquipped = !isAxeEquipped;
             if (isAxeEquipped)
             {
-                animator.SetLayerWeight(1, 0.5f);
+                animator.SetLayerWeight(1, 1f);
                 animator.Play("Equip Axe", 1);
             }
             else
