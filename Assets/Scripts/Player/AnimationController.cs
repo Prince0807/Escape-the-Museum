@@ -12,6 +12,7 @@ public class AnimationController : MonoBehaviour
     [SerializeField] LayerMask attackMask;
 
     [SerializeField] GameObject attackCollider;
+    [SerializeField] AudioSource axeSwingAudioSource;
 
     private bool isAxeEquipped;
 
@@ -45,10 +46,35 @@ public class AnimationController : MonoBehaviour
     {
         Collider[] objs = Physics.OverlapSphere(attackPoint.position, attackRange, attackMask);
 
+        int damage = 10;
+
+        string currentAnimationName = animator.GetCurrentAnimatorClipInfo(1)[0].clip.name;
+        switch (currentAnimationName)
+        {
+            case "Attack 1":
+                damage = 20;
+                break;
+            case "Attack 2":
+                damage = 25;
+                break;
+            case "Attack 3":
+                damage = 50;
+                break;
+            case "Attack 4":
+                damage = 100;
+                break;
+            default:
+                break;
+        }
+
         foreach (Collider obj in objs)
         {
             if (obj.TryGetComponent(out IDamageable hit))
-                hit.Damage(1000);
+            {
+                hit.Damage(damage);
+                return;
+            }
         }
+        axeSwingAudioSource.Play();
     }
 }

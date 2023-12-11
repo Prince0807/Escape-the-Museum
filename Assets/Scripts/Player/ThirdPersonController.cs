@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class ThirdPersonController : MonoBehaviour
+public class ThirdPersonController : MonoBehaviour, IDamageable
 {
     // Components
     CharacterController controller;
@@ -18,19 +19,28 @@ public class ThirdPersonController : MonoBehaviour
     [Header("Jumping")]
     public float jumpHeight;
     public float gravity;
-    bool isGrounded;
+    public bool isGrounded;
     Vector3 velocity;
+
+    [Header("Ground Check")]
+    public Transform foot;
+    public float groundDistance;
+    public LayerMask groundMask;
 
     [Header("Axe")]
     private bool isAxeEquipped = false;
 
     [HideInInspector] public bool isInteracting = false;
 
+    public int Health { get; set; }
+
     private void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
         playerCamera = Camera.main.transform;
+
+        Health = 100;
     }
 
     private void Update()
@@ -43,8 +53,9 @@ public class ThirdPersonController : MonoBehaviour
 
     private void CheckIsGrounded()
     {
-        isGrounded = controller.isGrounded;
-            //Physics.CheckSphere(transform.position, 0.1f, 1);
+        isGrounded = Physics.CheckSphere(foot.position, groundDistance, groundMask);
+        //isGrounded = controller.isGrounded;
+
         animator.SetBool("IsGrounded", isGrounded);
         if (isGrounded && velocity.y < 0)
             velocity.y = -1;
@@ -100,5 +111,17 @@ public class ThirdPersonController : MonoBehaviour
                 animator.Play("Unequip Axe", 0);
             }
         }
+    }
+
+    public void Damage(int damage)
+    {
+        Debug.Log(Health);
+        Health -= damage;
+        animator.SetTrigger("ReactHit");
+
+        GameManager.INSTANCE.SetBloodImageAlpha(Health);
+
+        if (Health <= 0)
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
